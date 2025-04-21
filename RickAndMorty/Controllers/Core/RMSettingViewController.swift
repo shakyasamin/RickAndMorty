@@ -6,6 +6,7 @@
 //
 
 import UIKit
+/// Controller to show various app options and Settings
 
 final class RMSettingViewController: UIViewController {
 
