@@ -7,8 +7,16 @@
 
 import UIKit
 
+
+protocol RMCharacterListViewDelegate: AnyObject {
+    func rmCharacterListView(_ characterListView: RMCharacterListView,
+    didSelectCharacter character: RMCharacter
+    )
+}
 /// View that handles showing list of characters, loder, etcf
 final class RMCharacterListView: UIView {
+    
+    public weak var delegate: RMCharacterListViewDelegate?
     
     private let viewModel = RMCharacterListViewViewModel()
     
@@ -22,12 +30,13 @@ final class RMCharacterListView: UIView {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isHidden = true
         collectionView.alpha = 0
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier)
+        collectionView.register(RMFooterLoadingCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: RMFooterLoadingCollectionReusableView.identifier)
         return collectionView
     }()
     
@@ -68,13 +77,21 @@ final class RMCharacterListView: UIView {
     
     private func setupCollectionView(){
         collectionView.dataSource = viewModel
-        collectionView.delegate = viewModel
-        
-        
+        collectionView.delegate = viewModel        
     }
 }
 
 extension RMCharacterListView:RMCharacterListViewViewModelDelegate{
+    func didLoadMoreCharacters(with newIndexPaths: [IndexPath]) {
+        collectionView.performBatchUpdates{
+            self.collectionView.insertItems(at: newIndexPaths)
+        }
+    }
+    
+    func didSelectCharacter(_ character: RMCharacter) {
+        delegate?.rmCharacterListView(self, didSelectCharacter: character)
+    }
+    
     func didLoadInitialCharacters() {
         self.spinner.stopAnimating()
         self.collectionView.isHidden = false
@@ -84,4 +101,6 @@ extension RMCharacterListView:RMCharacterListViewViewModelDelegate{
         }
         
     }
+    
+    
 }
