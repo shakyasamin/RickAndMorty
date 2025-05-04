@@ -54,8 +54,7 @@ final class RMCharacterDetailViewController: UIViewController {
             detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
         ])
-    }
-    
+    }    
 }
 
 // MARK: - CollectionView

@@ -60,15 +60,19 @@ final class RMCharacterInfoCollectionViewCellViewModel{
             switch self {
             case .status:
                 return .systemBlue
+                
             case .gender:
                 return .systemRed
+                
             case .type:
                 return .systemPurple
+                
             case .species:
                 return .systemGreen
                 
             case .origin:
                 return .systemOrange
+                
             case.created:
                 return .systemPink
                 
@@ -77,7 +81,6 @@ final class RMCharacterInfoCollectionViewCellViewModel{
                 
             case .episodeCount:
                 return .systemMint
-                
             }
         }
         
@@ -85,10 +88,13 @@ final class RMCharacterInfoCollectionViewCellViewModel{
             switch self {
             case .status:
                 return UIImage(systemName: "bell")
+                
             case .gender:
                 return UIImage(systemName: "bell")
+                
             case .type:
                 return UIImage(systemName: "bell")
+                
             case .species:
                 return UIImage(systemName: "bell")
                 

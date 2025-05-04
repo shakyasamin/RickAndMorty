@@ -125,7 +125,4 @@ final class RMCharacterDetailViewViewModel {
         section.orthogonalScrollingBehavior = .groupPaging
         return section
     }
-    
-    
-    
 }

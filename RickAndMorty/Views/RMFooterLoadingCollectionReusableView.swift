@@ -32,8 +32,7 @@ final class RMFooterLoadingCollectionReusableView: UICollectionReusableView {
             spinner.widthAnchor.constraint(equalToConstant: 100),
             spinner.heightAnchor.constraint(equalToConstant: 100),
             spinner.centerXAnchor.constraint(equalTo: centerXAnchor),
-            spinner.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
+            spinner.centerYAnchor.constraint(equalTo: centerYAnchor),            
         ])
     }
     
