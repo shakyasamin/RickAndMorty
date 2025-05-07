@@ -14,8 +14,6 @@ final class RMCharacterCollectionViewCellViewModel : Hashable, Equatable{
     private let characterStatus: RMCharacterStatus
     private let characterImageUrl: URL?
     
-    
-    
     //MARK: - Init
     init(
         characterName: String,
