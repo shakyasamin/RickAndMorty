@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 final class RMCharacterCollectionViewCellViewModel : Hashable, Equatable{
     
     public let characterName:String
