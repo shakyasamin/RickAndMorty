@@ -4,7 +4,7 @@
 //
 //  Created by MicroBanker Nepal Pvt. Ltd. on 21/04/2025.
 //
-
+import StoreKit
 import UIKit
 import SwiftUI
 import SafariServices
@@ -62,7 +62,9 @@ final class RMSettingViewController: UIViewController {
             present(vc, animated: true)
         }else if option == .rateApp{
             //show rating prompt
-            
+            if let windowScene = view.window?.windowScene {
+                SKStoreReviewController.requestReview(in: windowScene)
+            }
         }
     }
     
