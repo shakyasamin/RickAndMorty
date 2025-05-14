@@ -5,8 +5,9 @@
 //  Created by MicroBanker Nepal Pvt. Ltd. on 14/05/2025.
 //
 
-import Foundation
+import UIKit
 
 struct RMNoSearchResultsViewViewModel {
-    
+    let title = "No Results"
+    let image = UIImage(systemName: "magnifyingglass.circle")
 }
