@@ -7,6 +7,8 @@
 
 import UIKit
 
+/// vc to show about single Location
+
 class RMLocationDetailViewController:  UIViewController, RMLocationDetailViewViewModelDelegate, RMLocationDetailViewDelegate {
     
     private let viewModel: RMLocationDetailViewViewModel

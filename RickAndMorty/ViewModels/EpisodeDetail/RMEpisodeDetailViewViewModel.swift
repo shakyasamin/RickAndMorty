@@ -29,7 +29,7 @@ final class RMEpisodeDetailViewViewModel{
     public weak var delegate: RMEpisodeDetailViewViewModelDelegate?
     
     public private(set) var cellViewModels: [SectionType] = []
-   
+    
     
     //MARK: - Init
     
@@ -72,17 +72,17 @@ final class RMEpisodeDetailViewViewModel{
                     characterImageUrl: URL(string: character.image)
                 )
             }))
-               
+            
         ]
     }
     
     
     /// Fetch backing episode model
     public func fetchEpisodeData() {
-
+        
         guard let url = endpointUrl,
-
-        let request = RMRequest(url: url) else {
+              
+                let request = RMRequest(url: url) else {
             return
         }
         RMService.shared.execute(request, expecting: RMEpisode.self) {[weak self] result in

@@ -8,7 +8,7 @@
 import UIKit
 
 final class RMLocationTableViewCell: UITableViewCell {
-
+    
     static let cellIdentifier = "RMLocationTableViewCell"
     
     private let nameLabel: UILabel = {

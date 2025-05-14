@@ -72,17 +72,17 @@ final class RMLocationDetailViewViewModel{
                     characterImageUrl: URL(string: character.image)
                 )
             }))
-               
+            
         ]
     }
     
     
     /// Fetch backing location model
     public func fetchLocationData() {
-
+        
         guard let url = endpointUrl,
-
-        let request = RMRequest(url: url) else {
+              
+                let request = RMRequest(url: url) else {
             return
         }
         RMService.shared.execute(request, expecting: RMLocation.self) {[weak self] result in
@@ -101,7 +101,7 @@ final class RMLocationDetailViewViewModel{
         }).compactMap({
             return RMRequest(url: $0)
         })
-
+        
         
         let group = DispatchGroup()
         var characters: [RMCharacter] = []

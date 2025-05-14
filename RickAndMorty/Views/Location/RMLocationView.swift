@@ -85,7 +85,7 @@ final class RMLocationView: UIView {
 extension RMLocationView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         guard let locationModel = viewModel?.location(at: indexPath.row) else {
             return
         }
@@ -94,7 +94,7 @@ extension RMLocationView: UITableViewDelegate {
 }
 
 extension RMLocationView: UITableViewDataSource {
-  
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.cellViewModels.count ?? 0
     }

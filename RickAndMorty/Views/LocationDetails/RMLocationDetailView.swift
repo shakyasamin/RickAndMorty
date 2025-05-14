@@ -90,7 +90,6 @@ final class RMLocationDetailView: UIView {
         collectionView.register(RMEpisodeInfoCollectionViewCell.self, forCellWithReuseIdentifier: RMEpisodeInfoCollectionViewCell.cellIdentifier)
         collectionView.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier)
         
-        
         return collectionView
     }
     
@@ -166,11 +165,8 @@ extension RMLocationDetailView: UICollectionViewDelegate, UICollectionViewDataSo
             }
             delegate?.rmEpisodeDetailView(self, didSelect: character)
         }
-        
     }
 }
-
-
 
 extension RMLocationDetailView {
     private func layou(for section: Int) -> NSCollectionLayoutSection {
@@ -184,7 +180,6 @@ extension RMLocationDetailView {
             return createCharacterLayout()
         }
         
-       
     }
     
     func createInfoLayout() -> NSCollectionLayoutSection {
@@ -199,7 +194,6 @@ extension RMLocationDetailView {
     func createCharacterLayout() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
-        
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(260)), subitems: [item, item])
         
