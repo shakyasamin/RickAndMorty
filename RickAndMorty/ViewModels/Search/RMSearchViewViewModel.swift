@@ -16,6 +16,8 @@ final class RMSearchViewViewModel {
     
     private var searchResultHandler: ((RMSearchResultViewModel) -> Void)?
     
+    private var noResultsHandler: (() -> Void)?
+    
     //MARK: - Init
     
     init(config: RMSearchViewController.Config) {
@@ -26,6 +28,10 @@ final class RMSearchViewViewModel {
     
     public func registerSearchResultHandler( _ block: @escaping (RMSearchResultViewModel) -> Void){
         self.searchResultHandler = block
+    }
+    
+    public func registerNoResultHandler( _ block: @escaping () -> Void){
+        self.noResultsHandler = block
     }
     
     public func executeSearch() {
@@ -56,19 +62,19 @@ final class RMSearchViewViewModel {
             makeSearchAPICall(RMGetAllLocationsResponse.self, request: request)
         }
     }
-        private func makeSearchAPICall<T: Codable>(_ type: T.Type, request: RMRequest){
-            RMService.shared.execute(request, expecting: type) {[weak self] result in
-                //notify view of results, no results, or error
-
-                switch result {
-                case .success(let model):
-                    self?.processSearchResults(model: model)
-                case .failure:
-                    print("failed to get results")
-                    break
-                }
+    private func makeSearchAPICall<T: Codable>(_ type: T.Type, request: RMRequest){
+        RMService.shared.execute(request, expecting: type) {[weak self] result in
+            //notify view of results, no results, or error
+            
+            switch result {
+            case .success(let model):
+                self?.processSearchResults(model: model)
+            case .failure:
+                self?.handleNoResults()
+                break
             }
         }
+    }
     
     private func processSearchResults(model:Codable) {
         var resultsVM: RMSearchResultViewModel?
@@ -91,7 +97,7 @@ final class RMSearchViewViewModel {
             resultsVM = .locations(locationsResults.results.compactMap({
                 return RMLocationTableViewCellViewModel(location: $0)
             }))
-
+            
         }
         
         if let results = resultsVM {
@@ -99,9 +105,14 @@ final class RMSearchViewViewModel {
         }
         else {
             //Error: No results view
+            handleNoResults()
         }
     }
-        
+    
+    private func handleNoResults() {
+        noResultsHandler?()
+    }
+    
     
     public func set(query  text: String){
         self.searchText = text
