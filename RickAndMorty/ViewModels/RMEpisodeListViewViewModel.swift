@@ -19,7 +19,7 @@ final class RMEpisodeListViewViewModel: NSObject{
     
     public weak var delegate: RMEpisodeListViewViewModelDelegate?
     
-    private var isLoadingMoreCharacters = false
+    private var isLoadingMoreEpisodes = false
     
     private let borderColors: [UIColor] = [
         .systemGreen,
@@ -71,14 +71,15 @@ final class RMEpisodeListViewViewModel: NSObject{
     /// Paginate if additional episodes are needed
     public func fetchAdditionalEpisodes(url: URL) {
         
-        guard !isLoadingMoreCharacters else {
+        guard !isLoadingMoreEpisodes else {
             return
         }
         
-        isLoadingMoreCharacters = true
+        print("Fetching more episodes...")
+        isLoadingMoreEpisodes = true
         
         guard let request = RMRequest(url: url) else {
-            isLoadingMoreCharacters = false
+            isLoadingMoreEpisodes = false
             return
         }
         
@@ -102,14 +103,15 @@ final class RMEpisodeListViewViewModel: NSObject{
                 })
                 
                 strongSelf.episodes.append(contentsOf: moreResults)
-                
+                print("Fetched \(moreResults.count) more episodes, total now: \(strongSelf.episodes.count)")
+
                 DispatchQueue.main.async{
                     strongSelf.delegate?.didLoadMoreEpisodes(with: indexPathToAdd)
-                    strongSelf.isLoadingMoreCharacters = false
+                    strongSelf.isLoadingMoreEpisodes = false
                 }
             case.failure(let failure):
-                print(String(describing: failure))
-                self?.isLoadingMoreCharacters = false
+                print("Failed to fetch more episodes: \(String(describing: failure))")
+                self?.isLoadingMoreEpisodes = false
             }
         }
     }
@@ -154,7 +156,7 @@ extension RMEpisodeListViewViewModel: UICollectionViewDataSource ,UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let bounds = collectionView.bounds
-        let width = bounds.width-20
+        let width = bounds.width - 20
         return CGSize(width: width, height: 100)
     }
     
@@ -173,7 +175,7 @@ extension RMEpisodeListViewViewModel: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         guard shouldShowLoadMoreIndicator,
-              !isLoadingMoreCharacters,
+              !isLoadingMoreEpisodes,
               !cellViewModels.isEmpty,
               let nextUrlString = apiInfo?.next,
               let url = URL(string: nextUrlString) else {

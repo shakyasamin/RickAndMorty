@@ -83,6 +83,8 @@ final class RMEpisodeListView: UIView {
 
 extension RMEpisodeListView:RMEpisodeListViewViewModelDelegate{
     func didLoadMoreEpisodes(with newIndexPaths: [IndexPath]) {
+        print("Received \(newIndexPaths.count) new episodes")
+
         collectionView.performBatchUpdates{
             self.collectionView.insertItems(at: newIndexPaths)
         }
