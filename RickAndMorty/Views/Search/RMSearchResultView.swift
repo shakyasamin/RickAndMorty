@@ -198,13 +198,13 @@ extension RMSearchResultView: UICollectionViewDelegate, UICollectionViewDataSour
         if currentViewModel is RMCharacterCollectionViewCellViewModel {
             // character size
             
-            let width = (bounds.width-30)/2
+            let width = UIDevice.isiPhone ? (bounds.width-30)/2 : (bounds.width-50)/4
             return CGSize(width: width, height: width * 1.5)
         }
         
         //Episode
         
-        let width = bounds.width - 20
+        let width = UIDevice.isiPhone ? bounds.width - 20 : (bounds.width-50) / 4
         return CGSize(width: width, height: 100)
     }
   
