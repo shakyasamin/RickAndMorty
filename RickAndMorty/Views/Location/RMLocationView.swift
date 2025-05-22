@@ -24,7 +24,7 @@ final class RMLocationView: UIView {
                 self.tableView.alpha = 1
             }
             
-            viewModel?.registerDidFinishPaginationBlock { [weak self] in                
+            viewModel?.registerDidFinishPaginationBlock { [weak self] in
                 DispatchQueue.main.async {
                     // Loding indicator go bye bye
                     self?.tableView.tableFooterView = nil
@@ -92,6 +92,8 @@ final class RMLocationView: UIView {
     }
 }
 
+//MARK : - UITableViewDelegate
+
 extension RMLocationView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -102,6 +104,7 @@ extension RMLocationView: UITableViewDelegate {
         delegate?.rmLocationView(self, didSelect: locationModel)
     }
 }
+//MARK: - UITableViewDataSource
 
 extension RMLocationView: UITableViewDataSource {
     
@@ -125,6 +128,7 @@ extension RMLocationView: UITableViewDataSource {
     }
 }
 
+//MARK: - UIScrollViewDelegate
 
 extension RMLocationView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -141,10 +145,9 @@ extension RMLocationView: UIScrollViewDelegate {
             let totalScrollViewFixedHeight = scrollView.frame.size.height
             
             if offSet >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
-                DispatchQueue.main.async{
-                    self?.showLoadingIndicator()
-                }
+                self?.showLoadingIndicator()
                 viewModel.fetchAdditionalLocations()
+                
             }
             t.invalidate()
         }

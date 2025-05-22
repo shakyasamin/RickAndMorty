@@ -57,6 +57,8 @@ final class RMLocationViewViewModel{
         
         guard let nextUrlString = apiInfo?.next,
               let url = URL(string: nextUrlString) else {
+            
+            
             return
         }
         
