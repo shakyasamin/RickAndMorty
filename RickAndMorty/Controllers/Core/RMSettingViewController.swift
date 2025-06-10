@@ -8,6 +8,7 @@ import StoreKit
 import UIKit
 import SwiftUI
 import SafariServices
+
 /// Controller to show various app options and Settings
 
 final class RMSettingViewController: UIViewController {

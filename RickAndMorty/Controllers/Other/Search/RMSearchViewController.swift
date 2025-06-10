@@ -25,7 +25,6 @@ final class RMSearchViewController: UIViewController {
                 }
             }
             
-         
             
             var title: String {
                 switch self {
@@ -95,9 +94,7 @@ final class RMSearchViewController: UIViewController {
 
 //Mark: - RMSearchViewDelegate
 
-extension RMSearchViewController: RMSearchViewDelegate{
-   
- 
+extension RMSearchViewController: RMSearchViewDelegate{ 
     
     func rmSearchView(_ searchView: RMSearchView, didSelectOption option: RMSearchInputViewViewModel.DynamicOption) {
         

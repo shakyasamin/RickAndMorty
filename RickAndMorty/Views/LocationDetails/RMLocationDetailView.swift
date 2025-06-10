@@ -179,7 +179,6 @@ extension RMLocationDetailView {
         case .character:
             return createCharacterLayout()
         }
-        
     }
     
     func createInfoLayout() -> NSCollectionLayoutSection {
